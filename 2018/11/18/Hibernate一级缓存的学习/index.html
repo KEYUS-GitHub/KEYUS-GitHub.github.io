@@ -5,20 +5,20 @@
   
 
   
-  <title>Hibernate一级缓存的学习 | keyus coding way</title>
+  <title>Hibernate 一级缓存学习笔记 | keyus coding way</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Hibernate 一级缓存学习笔记Hibernate快照Hibernate快照与一级缓存 某次运行时异常的记录 2018/11/18 1234567891011@Testpublic void test0()&amp;#123;    session.beginTransaction();    Goods goods = new Goods();    goods.setName(&quot;pen&quot;);">
+  <meta name="description" content="Hibernate快照Hibernate快照与一级缓存 某次运行时异常的记录 2018/11/18 1234567891011@Testpublic void test0()&amp;#123;    session.beginTransaction();    Goods goods = new Goods();    goods.setName(&quot;pen&quot;);    goods.setPrice(1.">
 <meta name="keywords" content="Hibernate">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hibernate一级缓存的学习">
+<meta property="og:title" content="Hibernate 一级缓存学习笔记">
 <meta property="og:url" content="http://yoursite.com/2018/11/18/Hibernate一级缓存的学习/index.html">
 <meta property="og:site_name" content="keyus coding way">
-<meta property="og:description" content="Hibernate 一级缓存学习笔记Hibernate快照Hibernate快照与一级缓存 某次运行时异常的记录 2018/11/18 1234567891011@Testpublic void test0()&amp;#123;    session.beginTransaction();    Goods goods = new Goods();    goods.setName(&quot;pen&quot;);">
+<meta property="og:description" content="Hibernate快照Hibernate快照与一级缓存 某次运行时异常的记录 2018/11/18 1234567891011@Testpublic void test0()&amp;#123;    session.beginTransaction();    Goods goods = new Goods();    goods.setName(&quot;pen&quot;);    goods.setPrice(1.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-18T09:33:13.464Z">
+<meta property="og:updated_time" content="2018-11-18T10:53:06.658Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hibernate一级缓存的学习">
-<meta name="twitter:description" content="Hibernate 一级缓存学习笔记Hibernate快照Hibernate快照与一级缓存 某次运行时异常的记录 2018/11/18 1234567891011@Testpublic void test0()&amp;#123;    session.beginTransaction();    Goods goods = new Goods();    goods.setName(&quot;pen&quot;);">
+<meta name="twitter:title" content="Hibernate 一级缓存学习笔记">
+<meta name="twitter:description" content="Hibernate快照Hibernate快照与一级缓存 某次运行时异常的记录 2018/11/18 1234567891011@Testpublic void test0()&amp;#123;    session.beginTransaction();    Goods goods = new Goods();    goods.setName(&quot;pen&quot;);    goods.setPrice(1.">
   
     <link rel="alternate" href="/atom.xml" title="keyus coding way" type="application/atom+xml">
   
@@ -79,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hibernate一级缓存的学习
+      Hibernate 一级缓存学习笔记
     </h1>
   
 
@@ -87,7 +87,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Hibernate-一级缓存学习笔记"><a href="#Hibernate-一级缓存学习笔记" class="headerlink" title="Hibernate 一级缓存学习笔记"></a>Hibernate 一级缓存学习笔记</h1><h2 id="Hibernate快照"><a href="#Hibernate快照" class="headerlink" title="Hibernate快照"></a>Hibernate快照</h2><h3 id="Hibernate快照与一级缓存"><a href="#Hibernate快照与一级缓存" class="headerlink" title="Hibernate快照与一级缓存"></a>Hibernate快照与一级缓存</h3><ul>
+        <h2 id="Hibernate快照"><a href="#Hibernate快照" class="headerlink" title="Hibernate快照"></a>Hibernate快照</h2><h3 id="Hibernate快照与一级缓存"><a href="#Hibernate快照与一级缓存" class="headerlink" title="Hibernate快照与一级缓存"></a>Hibernate快照与一级缓存</h3><ul>
 <li><p>某次运行时异常的记录 2018/11/18</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test0</span><span class="params">()</span></span>&#123;</span><br><span class="line">    session.beginTransaction();</span><br><span class="line">    Goods goods = <span class="keyword">new</span> Goods();</span><br><span class="line">    goods.setName(<span class="string">"pen"</span>);</span><br><span class="line">    goods.setPrice(<span class="number">1.0</span>);</span><br><span class="line">    goods.setCount(<span class="number">200</span>);</span><br><span class="line">    session.save(goods);</span><br><span class="line">    goods.setName(<span class="string">"pencil"</span>);</span><br><span class="line">    session.getTransaction().commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -218,7 +218,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/18/Hibernate一级缓存的学习/" data-id="cjomoowqc0000ewus33qwu2nj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/18/Hibernate一级缓存的学习/" data-id="cjomrlc5s0000jous4md59v6v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li></ul>
@@ -227,16 +227,6 @@
   </div>
   
     
-<nav id="article-nav">
-  
-  
-    <a href="/2018/11/18/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
-
   
 </article>
 
@@ -283,11 +273,7 @@
       <ul>
         
           <li>
-            <a href="/2018/11/18/Hibernate一级缓存的学习/">Hibernate一级缓存的学习</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/18/hello-world/">Hello World</a>
+            <a href="/2018/11/18/Hibernate一级缓存的学习/">Hibernate 一级缓存学习笔记</a>
           </li>
         
       </ul>
