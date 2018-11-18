@@ -84,7 +84,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Hibernate快照"><a href="#Hibernate快照" class="headerlink" title="Hibernate快照"></a>Hibernate快照</h2><h3 id="Hibernate快照与一级缓存"><a href="#Hibernate快照与一级缓存" class="headerlink" title="Hibernate快照与一级缓存"></a>Hibernate快照与一级缓存</h3><ul>
+        <h2 id="Hibernate快照"><a href="#Hibernate快照" class="headerlink" title="Hibernate快照"></a>Hibernate快照</h2><h3 id="快照与一级缓存"><a href="#快照与一级缓存" class="headerlink" title="快照与一级缓存"></a>快照与一级缓存</h3><ul>
 <li><p>某次运行时异常的记录 2018/11/18</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test0</span><span class="params">()</span></span>&#123;</span><br><span class="line">    session.beginTransaction();</span><br><span class="line">    Goods goods = <span class="keyword">new</span> Goods();</span><br><span class="line">    goods.setName(<span class="string">"pen"</span>);</span><br><span class="line">    goods.setPrice(<span class="number">1.0</span>);</span><br><span class="line">    goods.setCount(<span class="number">200</span>);</span><br><span class="line">    session.save(goods);</span><br><span class="line">    goods.setName(<span class="string">"pencil"</span>);</span><br><span class="line">    session.getTransaction().commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -153,7 +153,7 @@
 <h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="各主流数据库的主键生成策略支持情况（此部分仅供参考，本人并未亲自验证，如有错误欢迎指正）"><a href="#各主流数据库的主键生成策略支持情况（此部分仅供参考，本人并未亲自验证，如有错误欢迎指正）" class="headerlink" title="各主流数据库的主键生成策略支持情况（此部分仅供参考，本人并未亲自验证，如有错误欢迎指正）"></a>各主流数据库的主键生成策略支持情况（此部分仅供参考，本人并未亲自验证，如有错误欢迎指正）</h3><table>
 <thead>
 <tr>
-<th>数据库名</th>
+<th>数据库管理系统</th>
 <th>是否支持字段自增</th>
 <th>是否支持序列</th>
 </tr>
@@ -215,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/18/Hibernate一级缓存的学习/" data-id="cjomrlc5s0000jous4md59v6v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/18/Hibernate一级缓存的学习/" data-id="cjomrzzpt00009cusuxk15jzg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li></ul>
