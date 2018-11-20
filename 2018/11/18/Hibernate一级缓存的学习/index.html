@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="keyus coding way">
 <meta property="og:description" content="Hibernate快照快照与一级缓存 某次运行时异常的记录 (2018/11/18) 123456789101112//温馨提示：可左右滑动@Testpublic void test0()&amp;#123;    session.beginTransaction();    Goods goods = new Goods();    goods.setName(&quot;pen&quot;);    goods.setP">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-18T11:36:21.465Z">
+<meta property="og:updated_time" content="2018-11-20T02:57:59.453Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hibernate 一级缓存学习笔记">
 <meta name="twitter:description" content="Hibernate快照快照与一级缓存 某次运行时异常的记录 (2018/11/18) 123456789101112//温馨提示：可左右滑动@Testpublic void test0()&amp;#123;    session.beginTransaction();    Goods goods = new Goods();    goods.setName(&quot;pen&quot;);    goods.setP">
@@ -146,7 +146,7 @@
 <li>clear()方法会清除Hibernate的一级缓存，故而在执行事务的commit()方法后并没有执行相应的update语句，来更新数据库中的数据。</li>
 <li>如果将 session.clear(); 语句换成 session.evict(goods); 也可以达到相同的效果，因为evict()方法可以用来清除某个对象的一级缓存。</li>
 </ol>
-<h3 id="void-refresh-Object-object"><a href="#void-refresh-Object-object" class="headerlink" title="void refresh(Object object);"></a>void refresh(Object object);</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//温馨提示：可左右滑动</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span></span>&#123;</span><br><span class="line">    session.beginTransaction();</span><br><span class="line">    Goods goods = session.get(Goods.class, <span class="number">9</span>);</span><br><span class="line">    System.out.println(goods);</span><br><span class="line">    goods.setName(<span class="string">"book"</span>);</span><br><span class="line">    session.refresh(goods);</span><br><span class="line">    System.out.println(goods);</span><br><span class="line">    session.getTransaction().commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="void-refresh-Object-var1"><a href="#void-refresh-Object-var1" class="headerlink" title="void refresh(Object var1);"></a>void refresh(Object var1);</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//温馨提示：可左右滑动</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span></span>&#123;</span><br><span class="line">    session.beginTransaction();</span><br><span class="line">    Goods goods = session.get(Goods.class, <span class="number">9</span>);</span><br><span class="line">    System.out.println(goods);</span><br><span class="line">    goods.setName(<span class="string">"book"</span>);</span><br><span class="line">    session.refresh(goods);</span><br><span class="line">    System.out.println(goods);</span><br><span class="line">    session.getTransaction().commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>控制台执行结果</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*温馨提示：可左右滑动*/</span></span><br><span class="line">Hibernate: </span><br><span class="line">    <span class="keyword">select</span></span><br><span class="line">        goods0_.idgoods <span class="keyword">as</span> idgoods1_0_0_,</span><br><span class="line">        goods0_.count <span class="keyword">as</span> count2_0_0_,</span><br><span class="line">        goods0_.name <span class="keyword">as</span> name3_0_0_,</span><br><span class="line">        goods0_.price <span class="keyword">as</span> price4_0_0_ </span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">        goods goods0_ </span><br><span class="line">    <span class="keyword">where</span></span><br><span class="line">        goods0_.idgoods=?</span><br><span class="line">Goods&#123;idgoods=<span class="number">9</span>, <span class="keyword">name</span>=<span class="string">'IT book'</span>, price=<span class="number">20.0</span>, <span class="keyword">count</span>=<span class="number">60</span>&#125;</span><br><span class="line">Hibernate: </span><br><span class="line">    <span class="keyword">select</span></span><br><span class="line">        goods0_.idgoods <span class="keyword">as</span> idgoods1_0_0_,</span><br><span class="line">        goods0_.count <span class="keyword">as</span> count2_0_0_,</span><br><span class="line">        goods0_.name <span class="keyword">as</span> name3_0_0_,</span><br><span class="line">        goods0_.price <span class="keyword">as</span> price4_0_0_ </span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">        goods goods0_ </span><br><span class="line">    <span class="keyword">where</span></span><br><span class="line">        goods0_.idgoods=?</span><br><span class="line">Goods&#123;idgoods=<span class="number">9</span>, <span class="keyword">name</span>=<span class="string">'IT book'</span>, price=<span class="number">20.0</span>, <span class="keyword">count</span>=<span class="number">60</span>&#125;</span><br></pre></td></tr></table></figure>
@@ -222,7 +222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/18/Hibernate一级缓存的学习/" data-id="cjomt30lz0000h4usy714u94b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/18/Hibernate一级缓存的学习/" data-id="cjopfdkd200030wus00hx4yhr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li></ul>
@@ -231,6 +231,20 @@
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2018/11/20/Hibernate的事务学习（一）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hibernate的事务学习（一）
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
 
@@ -275,6 +289,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/11/20/Hibernate的事务学习（一）/">Hibernate的事务学习（一）</a>
+          </li>
         
           <li>
             <a href="/2018/11/18/Hibernate一级缓存的学习/">Hibernate 一级缓存学习笔记</a>

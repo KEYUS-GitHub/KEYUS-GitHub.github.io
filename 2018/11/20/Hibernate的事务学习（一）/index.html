@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hibernate的事务学习（一） | keyus coding way</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="事务的基本特性（ACID特性）事务的四大基本特性分别是： 原子性 一致性 隔离性 持久性   原子性（Atomic）：表示一个事务是不可分割的最小单位，一个事务中可以包含多个操作，要么这些操作全部执行，要么全部不执行。 一致性（Consistency）：表示事务总是使得系统从一个一致的状态转换到另一个一致的状态（指的是宏观上的状态）。 隔离性（Isolation）：表示并发事务之间互相影响的程度。">
+<meta name="keywords" content="Hibernate">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hibernate的事务学习（一）">
+<meta property="og:url" content="http://yoursite.com/2018/11/20/Hibernate的事务学习（一）/index.html">
+<meta property="og:site_name" content="keyus coding way">
+<meta property="og:description" content="事务的基本特性（ACID特性）事务的四大基本特性分别是： 原子性 一致性 隔离性 持久性   原子性（Atomic）：表示一个事务是不可分割的最小单位，一个事务中可以包含多个操作，要么这些操作全部执行，要么全部不执行。 一致性（Consistency）：表示事务总是使得系统从一个一致的状态转换到另一个一致的状态（指的是宏观上的状态）。 隔离性（Isolation）：表示并发事务之间互相影响的程度。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-20T07:35:20.763Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hibernate的事务学习（一）">
+<meta name="twitter:description" content="事务的基本特性（ACID特性）事务的四大基本特性分别是： 原子性 一致性 隔离性 持久性   原子性（Atomic）：表示一个事务是不可分割的最小单位，一个事务中可以包含多个操作，要么这些操作全部执行，要么全部不执行。 一致性（Consistency）：表示事务总是使得系统从一个一致的状态转换到另一个一致的状态（指的是宏观上的状态）。 隔离性（Isolation）：表示并发事务之间互相影响的程度。">
+  
+    <link rel="alternate" href="/atom.xml" title="keyus coding way" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">keyus coding way</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Hibernate的事务学习（一）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/20/Hibernate的事务学习（一）/" class="article-date">
+  <time datetime="2018-11-20T00:41:22.000Z" itemprop="datePublished">2018-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hibernate的事务学习（一）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="事务的基本特性（ACID特性）"><a href="#事务的基本特性（ACID特性）" class="headerlink" title="事务的基本特性（ACID特性）"></a>事务的基本特性（ACID特性）</h2><h3 id="事务的四大基本特性分别是："><a href="#事务的四大基本特性分别是：" class="headerlink" title="事务的四大基本特性分别是："></a>事务的四大基本特性分别是：</h3><ol>
+<li>原子性</li>
+<li>一致性</li>
+<li>隔离性</li>
+<li>持久性</li>
+</ol>
+<ul>
+<li>原子性（Atomic）：表示一个事务是不可分割的最小单位，一个事务中可以包含多个操作，要么这些操作全部执行，要么全部不执行。</li>
+<li>一致性（Consistency）：表示事务总是使得系统从一个一致的状态转换到另一个一致的状态（指的是宏观上的状态）。</li>
+<li>隔离性（Isolation）：表示并发事务之间互相影响的程度。并发事务之间可能产生的问题有以下内容：脏读、不可重复读、幻读。而并发事务的隔离级别分别有以下几点：未提交读、已提交读、可重复读、可串行化。</li>
+<li>持久性（Durability）：表示事务提交以后，对系统产生的影响是持久的（系统在正常情况下保证数据不会丢失）。</li>
+</ul>
+<h3 id="并发事务可能产生的问题（详解）"><a href="#并发事务可能产生的问题（详解）" class="headerlink" title="并发事务可能产生的问题（详解）"></a>并发事务可能产生的问题（详解）</h3><ul>
+<li>脏读（Dirty-Read）：假设事务A修改了一个数据，但未提交，此时事务B读到了事务A未提交的修改结果，如果事务A提交失败，那么事务B读到的就是脏数据。</li>
+<li>不可重复读（Non-Repeatable-Read）：表示由于并发事务修改记录，在同一个事务中，对于同一份数据多次读取到的结果不一致的情况。</li>
+<li>幻读（Phantom-Read）：表示由于并发事务增加记录（这一点与不可重复读不同），在同一个事务中，同一个查询多次返回的结果不一致的情况。</li>
+</ul>
+<h3 id="并发事务的隔离级别（详解）"><a href="#并发事务的隔离级别（详解）" class="headerlink" title="并发事务的隔离级别（详解）"></a>并发事务的隔离级别（详解）</h3><ul>
+<li>未提交读（Read-Uncommitted）：不做任何处理，可能产生上述所有并发事务出现的问题。在数据库中，未提交读级别通常用二进制的0001表示，对应十进制的1。</li>
+<li>已提交读（Read-Committed）：仅在事务提交以后，其修改结果才允许被其他事务读取，可以解决脏读问题。在数据库中，已提交读级别通常用二进制的0010表示，对应十进制的2。</li>
+<li>可重复读（Repeatable-Read）：表示在一个事务读取了数据未提交前，禁止其他事务修改被读取的数据，以及在一个事务修改了数据未提交前（此时所有读取对应数据的事务都已提交），禁止其他事务读取或修改对应数据的情况，可以解决脏读及不可重复读的问题，但因为无法控制新插入的数据，因此无法解决幻读的问题。可重复读是MySQL数据库管理系统的默认隔离级别。在数据库中，可重复读级别通常用二进制的0100表示，对应十进制的4。</li>
+<li>可串行化（Serializable）：禁止事务并发执行，可以解决上述所有并发事务出现的问题，但性能最低，通常不会使用此隔离级别。在数据库中，可串行化级别通常用二进制的1000表示，对应十进制的8。</li>
+</ul>
+<h2 id="Hibernate与事务的使用"><a href="#Hibernate与事务的使用" class="headerlink" title="Hibernate与事务的使用"></a>Hibernate与事务的使用</h2><h3 id="在Hibernate中设置数据库隔离级别的方式"><a href="#在Hibernate中设置数据库隔离级别的方式" class="headerlink" title="在Hibernate中设置数据库隔离级别的方式"></a>在Hibernate中设置数据库隔离级别的方式</h3><ul>
+<li>在主配置文件中加入如下配置内容<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    温馨提示：可左右滑动</span></span><br><span class="line"><span class="comment">    指定Hibernate操作数据库的事物隔离级别</span></span><br><span class="line"><span class="comment">    可选值：1、2、4、8</span></span><br><span class="line"><span class="comment">    分别对应：未提交读、已提交读、可重复读、可串行化</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.isolation"</span>&gt;</span>4<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="用Hibernate控制事务的基本方法"><a href="#用Hibernate控制事务的基本方法" class="headerlink" title="用Hibernate控制事务的基本方法"></a>用Hibernate控制事务的基本方法</h3><ul>
+<li>Hibernate事务的基本操作<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//温馨提示：可左右滑动</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo0</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//获取事物对象的方式一</span></span><br><span class="line">    Transaction tx1 = session.getTransaction();</span><br><span class="line">    <span class="comment">//获取事物对象的方式二，获取时会自动开始事物</span></span><br><span class="line">    Transaction tx2 = session.beginTransaction();</span><br><span class="line">    <span class="comment">//温馨提示，同一个Session类对象返回的事物对象是相同的</span></span><br><span class="line">    <span class="comment">//故而此代码直接运行会因为Transaction already active而抛出异常</span></span><br><span class="line">    <span class="comment">//事物的开始操作</span></span><br><span class="line">    tx1.begin();</span><br><span class="line">    <span class="comment">//事物的回滚操作</span></span><br><span class="line">    tx1.rollback();</span><br><span class="line">    <span class="comment">//事物的提交操作</span></span><br><span class="line">    tx2.commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="保证Session类对象的线程安全"><a href="#保证Session类对象的线程安全" class="headerlink" title="保证Session类对象的线程安全"></a>保证Session类对象的线程安全</h3><ul>
+<li>通过将Session类对象绑定至ThreadLocal中保证线程安全</li>
+</ul>
+<ol>
+<li><p>在主配置文件中加入如下配置启用线程安全的Session类对象</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 温馨提示：可左右滑动 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 指定Session类对象与当前线程绑定 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 不使用此配置，接下来介绍的getCurrentSession()方法会抛出异常 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.current_session_context_class"</span>&gt;</span>thread<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过SessionFactory类对象的如下方法获得与当前线程绑定的Session类对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//温馨提示：可左右滑动</span></span><br><span class="line"><span class="function">Session <span class="title">getCurrentSession</span><span class="params">()</span> <span class="keyword">throws</span> HibernateException</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用getCurrentSession()方法获取的Session类对象会在事务提交时自动关闭（手动关闭会抛出异常）</p>
+</li>
+</ol>
+<h3 id="Hibernate控制事务的正确方法"><a href="#Hibernate控制事务的正确方法" class="headerlink" title="Hibernate控制事务的正确方法"></a>Hibernate控制事务的正确方法</h3><ul>
+<li>通过如下代码样例正确地控制事务<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//温馨提示：可左右滑动</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//此HibernateTool是本人封装的一个工具类</span></span><br><span class="line">    Session session1 = HibernateTool.getCurrentSession();</span><br><span class="line">    <span class="comment">//开始事物</span></span><br><span class="line">    Transaction tx = session1.beginTransaction();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//事物操作的相关内容</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        <span class="comment">//如果抛出异常，回滚事物</span></span><br><span class="line">        tx.rollback();</span><br><span class="line">        <span class="comment">//打印异常跟踪栈信息</span></span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//提交事物，不要关闭session</span></span><br><span class="line">    tx.commit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ol>
+<li>原子性是事务最重要的特性，在事务处理中需要小心谨慎</li>
+<li>事务处理中需要使用不同的隔离级别来控制并发事务产生的问题</li>
+<li>事务处理需要保证运行环境的线程安全</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/20/Hibernate的事务学习（一）/" data-id="cjopfdk6200000wuseb5bynd7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/11/18/Hibernate一级缓存的学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hibernate 一级缓存学习笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Hibernate/" style="font-size: 10px;">Hibernate</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/20/Hibernate的事务学习（一）/">Hibernate的事务学习（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/18/Hibernate一级缓存的学习/">Hibernate 一级缓存学习笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 keyus<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
