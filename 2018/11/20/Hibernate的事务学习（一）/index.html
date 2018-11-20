@@ -7,18 +7,18 @@
   
   <title>Hibernate的事务学习（一） | keyus coding way</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="事务的基本特性（ACID特性）事务的四大基本特性分别是： 原子性 一致性 隔离性 持久性   原子性（Atomic）：表示一个事务是不可分割的最小单位，一个事务中可以包含多个操作，要么这些操作全部执行，要么全部不执行。 一致性（Consistency）：表示事务总是使得系统从一个一致的状态转换到另一个一致的状态（指的是宏观上的状态）。 隔离性（Isolation）：表示并发事务之间互相影响的程度。">
+  <meta name="description" content="事务的基本特性（ACID）事务的四大基本特性分别是： 原子性 一致性 隔离性 持久性   原子性（Atomic）：表示一个事务是不可分割的最小单位，一个事务中可以包含多个操作，要么这些操作全部执行，要么全部不执行。 一致性（Consistency）：表示事务总是使得系统从一个一致的状态转换到另一个一致的状态（指的是宏观上的状态）。 隔离性（Isolation）：表示并发事务之间互相影响的程度。并发">
 <meta name="keywords" content="Hibernate">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hibernate的事务学习（一）">
 <meta property="og:url" content="http://yoursite.com/2018/11/20/Hibernate的事务学习（一）/index.html">
 <meta property="og:site_name" content="keyus coding way">
-<meta property="og:description" content="事务的基本特性（ACID特性）事务的四大基本特性分别是： 原子性 一致性 隔离性 持久性   原子性（Atomic）：表示一个事务是不可分割的最小单位，一个事务中可以包含多个操作，要么这些操作全部执行，要么全部不执行。 一致性（Consistency）：表示事务总是使得系统从一个一致的状态转换到另一个一致的状态（指的是宏观上的状态）。 隔离性（Isolation）：表示并发事务之间互相影响的程度。">
+<meta property="og:description" content="事务的基本特性（ACID）事务的四大基本特性分别是： 原子性 一致性 隔离性 持久性   原子性（Atomic）：表示一个事务是不可分割的最小单位，一个事务中可以包含多个操作，要么这些操作全部执行，要么全部不执行。 一致性（Consistency）：表示事务总是使得系统从一个一致的状态转换到另一个一致的状态（指的是宏观上的状态）。 隔离性（Isolation）：表示并发事务之间互相影响的程度。并发">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-20T07:35:20.763Z">
+<meta property="og:updated_time" content="2018-11-20T08:00:15.202Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hibernate的事务学习（一）">
-<meta name="twitter:description" content="事务的基本特性（ACID特性）事务的四大基本特性分别是： 原子性 一致性 隔离性 持久性   原子性（Atomic）：表示一个事务是不可分割的最小单位，一个事务中可以包含多个操作，要么这些操作全部执行，要么全部不执行。 一致性（Consistency）：表示事务总是使得系统从一个一致的状态转换到另一个一致的状态（指的是宏观上的状态）。 隔离性（Isolation）：表示并发事务之间互相影响的程度。">
+<meta name="twitter:description" content="事务的基本特性（ACID）事务的四大基本特性分别是： 原子性 一致性 隔离性 持久性   原子性（Atomic）：表示一个事务是不可分割的最小单位，一个事务中可以包含多个操作，要么这些操作全部执行，要么全部不执行。 一致性（Consistency）：表示事务总是使得系统从一个一致的状态转换到另一个一致的状态（指的是宏观上的状态）。 隔离性（Isolation）：表示并发事务之间互相影响的程度。并发">
   
     <link rel="alternate" href="/atom.xml" title="keyus coding way" type="application/atom+xml">
   
@@ -87,7 +87,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="事务的基本特性（ACID特性）"><a href="#事务的基本特性（ACID特性）" class="headerlink" title="事务的基本特性（ACID特性）"></a>事务的基本特性（ACID特性）</h2><h3 id="事务的四大基本特性分别是："><a href="#事务的四大基本特性分别是：" class="headerlink" title="事务的四大基本特性分别是："></a>事务的四大基本特性分别是：</h3><ol>
+        <h2 id="事务的基本特性（ACID）"><a href="#事务的基本特性（ACID）" class="headerlink" title="事务的基本特性（ACID）"></a>事务的基本特性（ACID）</h2><h3 id="事务的四大基本特性分别是："><a href="#事务的四大基本特性分别是：" class="headerlink" title="事务的四大基本特性分别是："></a>事务的四大基本特性分别是：</h3><ol>
 <li>原子性</li>
 <li>一致性</li>
 <li>隔离性</li>
@@ -144,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/20/Hibernate的事务学习（一）/" data-id="cjopfdk6200000wuseb5bynd7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/20/Hibernate的事务学习（一）/" data-id="cjopg8vvx0003tkuszi5p39yr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li></ul>
